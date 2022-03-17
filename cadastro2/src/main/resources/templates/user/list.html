@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Cadastro de Usuários</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <a href="/home" class="btn btn-dark">Home</a>
+        </div>
+        <div class="col-md-10">
+
+        </div>
+    </div>
+    <div th:if="${message != null}">
+        <hr/>
+        <div class="alert alert-info">
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+    <hr/>
+    <form th:action="@{/usuarios/buscanome}" th:method="get">
+            <div class="form-group">
+                <input type="text" id="buscaNome" name="buscaNome" class="form-control" placeholder="Buscar por nome/sobrenome"> <br>
+                <button type="submit" class="btn btn-sm btn-dark">Buscar</button>
+            </div>
+    </form>
+    <hr/>
+    <form th:action="@{/usuarios/buscaemail}" th:method="get">
+        <div class="form-group">
+            <input type="text" id="buscaEmail" name="buscaEmail" class="form-control" placeholder="Buscar por e-mail"> <br>
+            <button type="submit" class="btn btn-sm btn-dark">Buscar</button>
+        </div>
+    </form>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Email</th>
+                    <th>Data Cadastro/Atualização</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td><a th:href="@{/usuarios/{id}(id=${usuario.id})}"><span th:text="${usuario.nome}"></span></a></td>
+                    <td th:text="${usuario.sobrenome}"></td>
+                    <td th:text="${usuario.email}"></td>
+                    <td th:text="${#temporals.format(usuario.dataCadastro, 'dd/MM/yyyy')}"></td>
+                    <td>
+                        <a class="btn btn-sm btn-dark" th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}">Excluir</a>
+                        <a class="btn btn-sm btn-dark" th:href="@{/usuarios/atualizar/{id}(id=${usuario.id})}">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr/>
+    <div class="footer">
+        2022 | Thiago Ferreira
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>
+<td>

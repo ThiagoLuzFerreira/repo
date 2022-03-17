@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Cadastro de Usuários</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <a th:href="@{/usuarios/listar}" class="btn btn-dark">Lista</a>
+        </div>
+        <div class="col-md-10">
+
+        </div>
+    </div>
+    <hr/>
+    <h3>Detalhes do Usuário</h3>
+
+    <div th:each="usuario : ${usuario}">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Nome: <span th:text="${usuario.nome}"></span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>Sobrenome: <span th:text="${usuario.sobrenome}"></span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>Email: <span th:text="${usuario.email}"></span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>Data cadastro/atualização: <span th:text="${#temporals.format(usuario.dataCadastro, 'dd/MM/yyyy')}"></span></p>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <h5>Adicionar dependentes</h5>
+
+    <div th:if="${message != null}">
+        <div class="alert alert-info" role="alert">
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+    <hr/>
+        <form method="post" th:object="${dependente}">
+            <div class="row">
+                <input id="id" type="hidden" name="id"/>
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control" id="parentesco" name="parentesco" placeholder="Parentesco">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-dark">Adicionar</button>
+                </div>
+            </div>
+        </form>
+    <hr/>
+    <h5>Lista de dependentes</h5>
+    <hr/>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Parentesco</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="dependente : ${dependentes}">
+                    <td th:text="${dependente.nome}"></td>
+                    <td th:text="${dependente.sobrenome}"></td>
+                    <td th:text="${dependente.parentesco}"></td>
+                    <td>
+                        <a class="btn btn-sm btn-dark" th:href="@{/usuarios/excluirDependente/{id}(id=${dependente.id})}">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<!--    <div th:each="dependente : ${dependentes}">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <p>Nome: <span th:text="${dependente.nome}"></span></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <p>Sobrenome: <span th:text="${dependente.sobrenome}"></span></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <p>Parentesco: <span th:text="${dependente.parentesco}"></span></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <a class="btn btn-sm btn-dark" th:href="@{/usuarios/excluirDependente/{id}(id=${dependente.id})}">Excluir</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <hr/>-->
+<!--    </div>-->
+
+    <div class="footer">
+        2022 | Thiago Ferreira
+    </div>
+    </div>
+</div>
+
+</body>
+</html>
+<td>
