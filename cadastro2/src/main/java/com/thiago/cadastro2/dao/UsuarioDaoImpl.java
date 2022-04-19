@@ -53,4 +53,11 @@ public class UsuarioDaoImpl implements UsuarioDao{
         query.setParameter("email", "%"+buscaEmail+"%");
         return query.getResultList();
     }
+
+    @Override
+    public Usuario findByEmail2(String email) {
+        TypedQuery<Usuario> query = em.createQuery("from Usuario u where u.email = :email", Usuario.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
 }
