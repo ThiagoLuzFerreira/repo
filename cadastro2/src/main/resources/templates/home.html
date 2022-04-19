@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Projeto</title>
@@ -11,18 +12,31 @@
     <div class="jumbotron">
         <h1>Cadastro de Usuários</h1>
     </div>
+<!--    <div sec:authorize="isAuthenticated()" class="page-header">-->
+<!--        <h3>Bem vindo(a), <span sec:authentication="name"></span>!</h3>-->
+<!--    </div>-->
+<!--    <hr/>-->
     <hr/>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-11"></div>
+        <div class="col-md-1">
+            <form th:action="@{/logout}" method="post" >
+                <button type="submit" class="btn btn-dark">Sair</button>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-10">
             <h3> Clique ao lado para listar, ou adicionar usuários</h3>
         </div>
-            <div class="col-1">
-                <a th:href="@{usuarios/listar}" class="btn btn-dark">Listar</a>
-            </div>
-            <div class="col-2">
-                <a th:href="@{/usuarios/adicionar}" class="btn btn-dark">Adicionar</a>
-            </div>
+        <div sec:authorize="hasRole('ADMIN')" class="col-md-1">
+            <a th:href="@{/usuarios/adicionar}" class="btn btn-dark">Adicionar</a>
         </div>
+        <div sec:authorize="isAuthenticated()" class="col-md-1">
+            <a th:href="@{/usuarios/listar}" class="btn btn-dark">Listar</a>
+        </div>
+    </div>
     <hr/>
     <div class="footer">
         2022 | Thiago Ferreira
