@@ -13,6 +13,7 @@ public interface UsuarioService {
     List<Usuario> findAll();
     List<Usuario> findByNomeOuSobrenome(String buscaNome);
     List<Usuario> findByEmail(String buscaEmail);
+    Usuario findByEmail2 (String email);
 
 
 }

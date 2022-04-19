@@ -57,4 +57,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         return dao.findByEmail(buscaEmail);
     }
 
+    @Override
+    public Usuario findByEmail2(String email) {
+        return dao.findByEmail2(email);
+    }
+
 }
