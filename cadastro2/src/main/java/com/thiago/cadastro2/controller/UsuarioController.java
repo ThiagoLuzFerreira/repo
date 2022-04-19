@@ -70,7 +70,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value ="/buscanome", method = RequestMethod.GET)
-    public ModelAndView buscaNome(@RequestParam("buscaNome") String buscaNome){
+        public ModelAndView buscaNome(@RequestParam("buscaNome") String buscaNome){
         if(buscaNome == null){
             return new ModelAndView("/user/list");
         }
